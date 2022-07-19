@@ -1,0 +1,32 @@
+Version 9.0.1.9 (2020-10-13)
+- TOC update for Retail patch 9.0.1
+
+Version 8.3.0.8 (2020-01-22)
+- TOC update for Retail patch 8.3.0
+
+Version 8.2.5.7 (2019-12-10)
+- Compatible with WoW Retail 8.2.5
+- Compatible with WoW Classic 1.13.3
+
+Version 8.2.0.6 (2019-09-16)
+- Compatible with WoW Classic
+
+Version 8.2.0.5 (2019-06-25)
+- Compatible with Patch 8.2
+
+Version 8.1.0.4 (2019-02-17)
+- Compatible with Patch 8.1
+
+Version 8.0.1.3 (2018-07-17)
+- Compatible with Battle for Azeroth
+- Added display of maximum stack size
+
+Version BETA-8.0.1.b1 (2018-05-02)
+- Compatible with Battle for Azeroth: Beta
+
+Version 7.3.5.2 (2018-04-30)
+- Fixed crash when talking to profession trainers
+
+Version 7.3.5.1 (2018-04-21)
+- First Release
+- Compatible with Patch 7.3.5
