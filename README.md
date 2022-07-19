@@ -1,7 +1,4 @@
-# ItemType
- World of Warcraft Addon
-
-## About ItemType:
+# ItemType Addon for World of Warcraft
 This addon adds the Item Type and Item Subtype to tooltips.
 I made this so I can sort items in to groups based on their Itemtype in TSM without having to look up a bunch of obscure crafting materials on Wowhead.
 
