@@ -1,5 +1,5 @@
 # ItemType
- a World of Warcraft addon by Ne0nguy (Ryan West)
+ A World of Warcraft addon by Ne0nguy (Ryan West)
 
 ## About ItemType:
 This addon adds the Item Type and Item Subtype to tooltips.
