@@ -1,9 +1,10 @@
-# Interface: 11303
-## Interface: 90001
+## Interface: 11508, 11509, 16001, 20506, 38000, 38002, 50504, 120100, 120105
 
 ## Title: ItemType
 ## Notes: Adds type and subtype info to tooltips
 ## Author: Ne0nguy
-## Version: 9.0.1.9
+## Version: @project-version@
 ## X-Website: Ne0nguy.com
+## X-Curse-Project-ID: 292525
+## X-WoWI-ID: 24600
 ItemType.lua

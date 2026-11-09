@@ -1,52 +1,33 @@
-local ItemType = {};
-ItemType.version = GetAddOnMetadata("ItemType", "Version");
+-- Modern clients moved GetItemInfo into C_Item; fall back for older clients.
+local GetItemInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo;
 
--- ################################################################ --
--- ##                                                            ## --
--- ##  Startup Functions                                         ## --
--- ##                                                            ## --
--- ################################################################ --
-
-function ItemType.OnEvent(_, event, arg1, arg2)
-	if (event == "ADDON_LOADED" and arg1 == "ItemType") then		
-		-- Rollover Item Tooltips
-		ItemRefTooltip:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		ItemRefShoppingTooltip1:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		ItemRefShoppingTooltip2:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		--ItemRefShoppingTooltip3:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		-- Linked Item Tooltips
-		GameTooltip:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		ShoppingTooltip1:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		ShoppingTooltip2:HookScript("OnTooltipSetItem", ItemType.AttachMain);
-		--ShoppingTooltip3:HookScript("OnTooltipSetItem", ItemType.AttachMain);
+local function OnTooltipSetItem(tooltip)
+	if (tooltip ~= GameTooltip and tooltip ~= ItemRefTooltip) then
+		return;
 	end
+
+	local _, link = tooltip:GetItem();
+	if (link == nil) then
+		return;
+	end
+
+	local _, _, _, _, _, sType, sSubType, itemStackCount = GetItemInfo(link);
+	if (sType == nil) then
+		-- Item info not cached yet; the tooltip will refresh once it is.
+		return;
+	end
+
+	local stringL = ((sSubType and sSubType ~= "") and sType .. " | " .. sSubType or sType);
+	local stringR = (itemStackCount and itemStackCount .. " per stack" or "");
+	tooltip:AddLine(" ");
+	tooltip:AddDoubleLine(stringL, stringR, 1, 0.82, 0, 1, 1, 1);
 end
 
--- ################################################################ --
--- ##                                                            ## --
--- ##  Addon Core Functions                                      ## --
--- ##                                                            ## --
--- ################################################################ --
-
-function ItemType.AttachMain(self)
-	local _, link = self:GetItem();
-	if (link ~= nil) then
-		local _, _, _, _, _, sType, sSubType, itemStackCount = GetItemInfo(link);
-		if (sSubType == nil) then
-			self:AddDoubleLine(sType, itemStackCount, 1, 0.82, 0, 1, 1, 1);
-		else
-			self:AddDoubleLine(sType .. " | " ..sSubType, itemStackCount, 1, 0.82, 0, 1, 1, 1);
-		end
-		self:Show();
-	end
+if (TooltipDataProcessor and Enum and Enum.TooltipDataType) then
+	-- Modern tooltip system
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnTooltipSetItem);
+else
+	-- Legacy tooltip system
+	GameTooltip:HookScript("OnTooltipSetItem", OnTooltipSetItem);
+	ItemRefTooltip:HookScript("OnTooltipSetItem", OnTooltipSetItem);
 end
-
--- ################################################################ --
--- ##                                                            ## --
--- ##  Last to load functions                                    ## --
--- ##                                                            ## --
--- ################################################################ --
-
-ItemType.frame = CreateFrame("Frame", "ItemTypeFrame");
-ItemType.frame:RegisterEvent("ADDON_LOADED");
-ItemType.frame:SetScript("OnEvent", ItemType.OnEvent);

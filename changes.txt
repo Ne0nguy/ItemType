@@ -1,3 +1,40 @@
+Version 18.0.0 (2026-11-09)
+- New version scheme: MAJOR.MINOR.PATCH, independent of game version.
+  Supported game versions are listed in the TOC's Interface line instead.
+- Single TOC supporting all current game versions:
+  Retail (120100, 120105), Classic (50504, 38000, 38002, 20506),
+  Classic Era (11508, 11509), WoW: Forever (16001)
+- Uses C_Item.GetItemInfo and TooltipDataProcessor when available,
+  with fallbacks for older clients
+- Fixed error when hovering items not yet in the item cache
+
+Version 11.0.2.17 (2024-08-13)
+- TOC update for Patch 11.0.2
+
+Version 11.0.0.16 (2024-07-24)
+- Compatible with Patch 11.0.0
+
+Version 10.0.5.15 (2023-01-24)
+- Compatible with Patch 10.0.5
+
+Version 10.0.2.14 (2022-12-18)
+- Fixed error when stack size returns nil value
+- Revised tooltip formatting
+
+Version 10.0.2.13 (2022-12-05)
+- Fixed mismatched string error
+- Revised tooltip formatting
+
+Version 10.0.2.12 (2022-12-05)
+- Fixed bug that applied to items without a subtype
+
+Version 10.0.2.11 (2022-12-05)
+- Revised tooltip formatting
+
+Version 10.0.2.10 (2022-11-29)
+- Compatible with WoW Dragonflight
+- Revised tooltip formatting
+
 Version 9.0.1.9 (2020-10-13)
 - TOC update for Retail patch 9.0.1
 

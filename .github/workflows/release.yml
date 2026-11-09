@@ -1,0 +1,37 @@
+name: Release
+
+# Push a tag (e.g. 18.0.1) to build and upload to CurseForge, WoWInterface and GitHub Releases.
+# Or click "Run workflow" in the Actions tab for a dry run: builds the zip without uploading
+# and attaches it to the run for download.
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+permissions:
+  contents: write # lets the packager create the GitHub Release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # packager needs full history/tags
+
+      - uses: BigWigsMods/packager@v2
+        with:
+          # -d = skip upload (dry run) when started manually
+          args: ${{ github.event_name == 'workflow_dispatch' && '-d' || '' }}
+
+      - name: Attach zip to run (dry run only)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ItemType-dry-run
+          path: .release/*.zip

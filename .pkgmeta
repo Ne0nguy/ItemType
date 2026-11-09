@@ -1,0 +1,11 @@
+package-as: ItemType
+
+manual-changelog:
+  filename: changes.txt
+  markup-type: plain
+
+ignore:
+  - .claude
+  - .github
+  - .gitignore
+  - .pkgmeta
