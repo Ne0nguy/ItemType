@@ -20,7 +20,7 @@ jobs:
       WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
       GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0 # packager needs full history/tags
 
@@ -31,7 +31,8 @@ jobs:
 
       - name: Attach zip to run (dry run only)
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ItemType-dry-run
           path: .release/*.zip
+          include-hidden-files: true # .release is a dot-folder
